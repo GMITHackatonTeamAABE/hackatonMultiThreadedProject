@@ -1,9 +1,7 @@
 // Hack.cpp : Defines the entry point for the console application.
 //
-
-
-int main()
+#include <SDL.h>
+int wmain()
 {
     return 0;
 }
-
