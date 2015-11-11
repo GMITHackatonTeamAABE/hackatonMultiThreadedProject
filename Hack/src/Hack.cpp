@@ -1,5 +1,3 @@
-// Hack.cpp : Defines the entry point for the console application.
-//
 #include <SDL.h>			//SDL
 #include <SDL_ttf.h>
 #include <string>
@@ -171,4 +169,3 @@ void ClearPointers()
 {
 	delete backGroundImage;
 }
-
