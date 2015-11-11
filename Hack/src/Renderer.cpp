@@ -1,5 +1,4 @@
-#include "stdafx.h"
-#include "Renderer.h"
+#include <include\Renderer.h>
 
 bool Renderer::instanceFlag = false;
 Renderer* Renderer::instance = NULL;

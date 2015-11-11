@@ -1,5 +1,4 @@
-#include "stdafx.h"
-#include "Sprite.h"
+#include <include\Sprite.h>
 
 
 Sprite::Sprite()

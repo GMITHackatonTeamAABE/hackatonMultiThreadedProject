@@ -1,5 +1,4 @@
-#include "stdafx.h"
-#include "KeyboardInput.h"
+#include <include/KeyBoardInput.h>
 
 
 bool KeyBoardInput::instanceFlag = false;

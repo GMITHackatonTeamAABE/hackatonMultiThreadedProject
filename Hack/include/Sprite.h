@@ -2,7 +2,7 @@
 #define SPRITE_H
 
 #include <iostream> 
-#include "SDL.h"
+#include <SDL.h>
 #include <SDL_image.h>
 #include <string>
 #include "Renderer.h"
