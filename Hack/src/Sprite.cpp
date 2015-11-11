@@ -3,8 +3,8 @@
 
 Sprite::Sprite()
 {
-	x_offset = 0;
-	y_offset = 0;
+	m_offset = {0,0};
+	rotation = 0;
 }
 void Sprite::Init(std::string imagePath, SDL_Rect destination, SDL_Rect source)
 {
@@ -33,15 +33,19 @@ void Sprite::SetSourceRect(SDL_Rect source)
 { 
 	m_Source = source;
 }
-void Sprite::SetOffset(int x, int y)
+void Sprite::SetOffset(SDL_Point offset)
 {
-	x_offset = x;
-	y_offset = y;
+	m_offset = offset;
 }
+void Sprite::SetRotation(double rot)
+{
+	rotation = rot;
+}
+
 void Sprite::Draw()
 {
-	SDL_Rect newDest{ m_Destrination.x - x_offset, m_Destrination.y - y_offset, m_Destrination.w, m_Destrination.h };
-	Renderer::GetInstance()->DrawImage(&m_Source, &newDest, myTexture);
+	SDL_Rect newDest{ m_Destrination.x - m_offset.x, m_Destrination.y - m_offset.y, m_Destrination.w, m_Destrination.h };
+	Renderer::GetInstance()->DrawImage(&m_Source, &newDest, myTexture,rotation,&m_offset);
 }
 SDL_Texture* Sprite::loadTexture(std::string path, SDL_Renderer* gRenderer){
 	//The final texture

@@ -48,6 +48,11 @@ void Renderer::Draw(SDL_Rect rectangle){
 void Renderer::DrawImage(SDL_Rect *source, SDL_Rect *dest, SDL_Texture *text ){
 	SDL_RenderCopy(gRenderer, text, source, dest);	//Copy the image to the rendering object.
 }
+void Renderer::DrawImage(SDL_Rect *source, SDL_Rect *dest, SDL_Texture *text, double angle, SDL_Point* centre) {
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+	SDL_RenderCopyEx(gRenderer, text, source, dest, angle, centre, flip);//Copy the image to the rendering object.
+	
+}
 void Renderer::ClearRenderer()
 {
 	// Sets colour that we're clearing the screen with

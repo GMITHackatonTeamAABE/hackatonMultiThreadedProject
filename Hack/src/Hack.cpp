@@ -5,7 +5,7 @@
 #include <string>
 #include "include\Renderer.h"
 #include "include\Sprite.h"
-
+#include "include\KeyBoardInput.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1248;			//SDL
@@ -70,7 +70,7 @@ int wmain()
 			while (!quit)
 			{
 				while (SDL_PollEvent(&e) != 0) {
-					//KeyBoardInput::GetInstance()->updateKeyboard(e);
+					KeyBoardInput::GetInstance()->updateKeyboard(e);
 					switch (e.type)
 					{
 					case SDL_QUIT:
@@ -97,10 +97,10 @@ int wmain()
 				}//end switch
 
 				 // Escape button
-				//if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_ESCAPE))
-				//{
-				//	quit = true;
-				//}
+				if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_ESCAPE))
+				{
+					quit = true;
+				}
 
 			}//end while wuit
 		}//end else
@@ -115,9 +115,10 @@ void Init()
 
 	gameState = MENU;
 	backGroundImage = new Sprite();
-	SDL_Rect destination = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+	SDL_Rect destination = { SCREEN_WIDTH/2 ,SCREEN_HEIGHT/2 , SCREEN_WIDTH, SCREEN_HEIGHT };
 	SDL_Rect Source = { 0, 0, 1240, 720 };
 	backGroundImage->Init("Assets/menu.png", destination, Source);
+	backGroundImage->SetOffset(SDL_Point{ SCREEN_WIDTH/2,SCREEN_HEIGHT/2});
 }
 void DrawGame()
 {

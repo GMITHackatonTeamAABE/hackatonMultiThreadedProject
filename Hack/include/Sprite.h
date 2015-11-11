@@ -18,13 +18,15 @@ public :
 	void SetHeight(float h);
 	void SetDestinationRect(SDL_Rect destination);
 	void SetSourceRect(SDL_Rect source);
-	void SetOffset(int x, int y);/*offset is relative width and height of the sprite not the texture */
+	void SetOffset(SDL_Point offset);/*offset is relative width and height of the sprite not the texture */
+	void SetRotation(double rot);
 	void Draw();
 
 private:
 	SDL_Texture* loadTexture(std::string path, SDL_Renderer*);
 	SDL_Texture* myTexture;
-	int x_offset, y_offset;
+	SDL_Point m_offset;
 	SDL_Rect m_Destrination, m_Source;
+	double rotation;
 };
 #endif
