@@ -10,6 +10,7 @@ public:
 	~Enemy();
 	void update();
 	void draw();
+	bool checkCollisions();
 private:
 	Sprite m_sprite;
 	b2Vec2 m_velocity;

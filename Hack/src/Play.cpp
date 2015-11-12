@@ -13,7 +13,6 @@ Play::Play(b2World* w, int SCREEN_WIDTH, int SCREEN_HEIGHT) :
 
 	tower = new Tower(*world, 1000, 200);
 	floor = new Floor(world, SDL_Rect{0,SCREEN_HEIGHT,SCREEN_WIDTH,10});
-	EnemyManager::GetInstance()->AddEnemy(10, 654, world);
 }
 
 void Play::Init()
@@ -24,6 +23,7 @@ void Play::Update()
 {
 	if (!clockInit)
 	{
+		myClock = std::chrono::steady_clock();
 		lastTickTime = myClock.now();
 		clockInit = true;
 	}
@@ -38,7 +38,12 @@ void Play::Update()
 			);
 		EnemyManager::GetInstance()->Update();
 	}
+	timeSinceGameStartInMS += 8;
+	if (timeSinceGameStartInMS % 10000 < 10) {
+		EnemyManager::GetInstance()->AddEnemy(10, 654, world);
+	}
 }
+
 void Play::Draw() const
 {
 	Renderer::GetInstance()->ClearRenderer();
