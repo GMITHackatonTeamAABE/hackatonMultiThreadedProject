@@ -9,7 +9,7 @@
 #include "include\Button.h"
 #include "include\GameStateController.h"
 #include <include/Tower.h>
-
+#include "include\Bullet.h"
 
 static class Play
 {
@@ -17,6 +17,7 @@ private:
 	Sprite* backGroundImage;
 	Tower* tower;
 	b2World* world;
+	Bullet* bullet;
 public:
 
 	Play(b2World*,int w, int h);
