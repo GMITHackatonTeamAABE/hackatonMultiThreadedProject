@@ -1,8 +1,12 @@
 #include <include/Tower.h>
 
-Tower::Tower(b2World &world, float posX, float posY):
-	mAngle(0),
-	mTURRET_OFFSET(30, 10)
+Tower::Tower(b2World &world, float _posX, float _posY):
+	mAngle(180),
+	mTURRET_OFFSET(40, 20),
+	posX(_posX),
+	posY(_posY),
+	mMAX_ANGLE(270),
+	mMIN_ANGLE(150)
 {
 	mBodySprite.Init("./assets/base.png",
 		SDL_Rect{ int(posX),int(posY),76,43 },
@@ -56,17 +60,37 @@ void normalize(float& x, float& y)
 	y /= length;
 }
 
-float toDegrees(float radians)
+//float toDegrees(float radians)
+//{
+//	return radians * 57.2958f;
+//}
+//
+//void Tower::update(float timestep, float targetX, float targetY)
+//{
+//	targetX -= posX;
+//	targetY -= posY;
+//	normalize(targetX, targetY);
+//	mAngle = toDegrees(acos(dotProduct(targetX, 1, targetY, 0)));
+//
+//	if(targetY < posY)
+//	{
+//		mAngle = -mAngle;
+//	}
+//
+//	mTurretSprite.SetRotation(mAngle);
+//
+//	std::cout << "Angle: " << mAngle << std::endl;
+//}
+
+void Tower::update(bool angleUp, bool angleDown)
 {
-	return radians * 57.2958f;
-}
+	if(angleUp && mAngle > mMIN_ANGLE)
+	{
+		mAngle--;
+	} else if(angleDown && mAngle < mMAX_ANGLE)
+	{
+		mAngle++;
+	}
 
-void Tower::update(float timestep, float targetX, float targetY)
-{
-	normalize(targetX, targetY);
-	mAngle = toDegrees(acosf(dotProduct(targetX, 1, targetY, 0)));
-
-	//mTurretSprite.setRotation(mAngle);
-
-	std::cout << "Angle: " << mAngle << std::endl;
+	mTurretSprite.SetRotation(mAngle);
 }

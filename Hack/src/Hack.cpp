@@ -3,6 +3,7 @@
 #include <SDL.h>			//SDL
 #include <SDL_ttf.h>
 #include <string>
+#include <chrono>
 #include "include\GameStateController.h"
 #include "include\Renderer.h"
 #include "include\Sprite.h"
@@ -18,27 +19,18 @@ const int SCREEN_HEIGHT = 704;			//SDL
 
 Menu* menu;
 Play* play;
-b2World world(b2Vec2_zero);
-
-
-
-
-
-int mouseX, mouseY;
-
+b2World world(b2Vec2(0,9.81));
 
 void Init();
 void Reset();
 void ClearPointers();
 
-
-int wmain()
-{
+int wmain(){
 	//The window we'll be rendering to
-	SDL_Window* window = NULL;
+
+	SDL_Window* window = nullptr;
 
 	//SDL
-#pragma region SDL STUFF
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -48,7 +40,7 @@ int wmain()
 	{
 		//Create window
 		window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-		if (window == NULL)
+		if (window == nullptr)
 		{
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 		}
@@ -63,9 +55,6 @@ int wmain()
 			bool quit = false;
 			Init();
 
-
-
-
 			SDL_Event e;
 			while (!quit)
 			{
@@ -77,9 +66,7 @@ int wmain()
 						quit = true;
 						break;
 					case SDL_MOUSEMOTION:
-						mouseX = e.motion.x;
-						mouseY = e.motion.y;
-						std::cout << "X: " << mouseX << "\tY: " << mouseY << std::endl;
+						play->UpdateMousePos(e.motion.x, e.motion.y);
 						break;
 					}
 				}
@@ -92,25 +79,21 @@ int wmain()
 					quit = menu->Update(e);
 					//draw menu
 					menu->Draw();
-
 					break;
 				case GameStateController::PLAY:
-					
 					play->Update();
 					play->Draw();
 					break;
 				case GameStateController::PAUSE:
-					
 					break;
 				}//end switch
 
 				 // Escape button
-				if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_ESCAPE))
-				{
+				if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_ESCAPE)){
 					quit = true;
 				}
 
-			}//end while wuit
+			}//end while wait
 		}//end else
 	}//end else
 
@@ -118,21 +101,15 @@ int wmain()
 	return 0;
 }
 
-void Init()
-{
-
+void Init(){
 	menu = new Menu(SCREEN_WIDTH, SCREEN_HEIGHT);
 	play = new Play(&world,SCREEN_WIDTH, SCREEN_HEIGHT);
-	
-
 }
-void Reset()
-{
 
+void Reset(){
 }
-void ClearPointers()
-{
+
+void ClearPointers(){
 	delete menu;
 	delete play;
-	
 }

@@ -16,7 +16,7 @@
 #include "include\Sprite.h"
 #include "include\Renderer.h"
 
-static class Button
+class Button
 {
 private:
 	SDL_Rect rect;

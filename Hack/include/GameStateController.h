@@ -7,7 +7,7 @@
 #include <fstream>
 #include <SDL.h>
 
-static class GameStateController
+class GameStateController
 {
 private:
 	static bool instanceFlag;
@@ -27,7 +27,7 @@ public:
 		instanceFlag = false;
 	}
 	void SetGameState(int);
-	int getGameState();
+	int getGameState() const;
 
 };
 #endif

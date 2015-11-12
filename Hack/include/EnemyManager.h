@@ -10,6 +10,7 @@ public:
 	~EnemyManager();
 	bool Init();
 	void Draw();
+	void Update();
 	void AddEnemy(float xPos, float yPos, b2World* physicsWorld);
 	void RemoveEnemy(Enemy* removalEnemy);
 private:
