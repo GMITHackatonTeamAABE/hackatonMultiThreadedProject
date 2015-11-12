@@ -31,6 +31,9 @@
     <ClCompile Include="src\Play.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Bullet.h">
@@ -58,6 +61,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\Play.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
