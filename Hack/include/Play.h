@@ -9,6 +9,7 @@
 #include "include\Button.h"
 #include "include\GameStateController.h"
 #include <include/Tower.h>
+#include "EnemyManager.h"
 
 
 static class Play

@@ -17,7 +17,7 @@ private:
 	static EnemyManager* instance;
 	static bool instanceFlag;
 	std::list<Enemy*> m_enemies;
-	Enemy* newEnemy;
+	
 };
 
 #endif

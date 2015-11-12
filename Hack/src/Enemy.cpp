@@ -1,7 +1,7 @@
-#include <Enemy.h>
+#include <include\Enemy.h>
 
 Enemy::Enemy(float xPos, float yPos, b2World* physicsWorld) {
-	m_sprite.Init("PathToImage",
+	m_sprite.Init("Assest\bulletTemp.png",
 					SDL_Rect{ (int)xPos, (int)yPos, 100, 100 },
 					SDL_Rect{ 0, 0, 100, 100 });
 	

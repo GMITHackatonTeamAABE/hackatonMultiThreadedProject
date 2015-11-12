@@ -15,12 +15,12 @@ EnemyManager* EnemyManager::GetInstance() {
 }
 
 EnemyManager::~EnemyManager() {
-	newEnemy = NULL;
+	
 }
 
 void EnemyManager::AddEnemy(float xPos, float yPos, b2World* physicsWorld) {
-	newEnemy = new Enemy(xPos, yPos, physicsWorld);
-	m_enemies.push_back(newEnemy);
+	
+	m_enemies.push_back(new Enemy(xPos, yPos, physicsWorld));
 }
 
 bool EnemyManager::Init() {
