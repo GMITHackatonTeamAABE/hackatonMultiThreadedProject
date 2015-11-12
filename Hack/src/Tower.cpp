@@ -126,6 +126,7 @@ void Tower::update(bool angleUp, bool angleDown, bool fire)
 
 	if(fire && !fired)
 	{
+		SoundManager::GetInstance()->play(SoundManager::SHOOT);
 		double x, y;
 		x = (barrelOrigin.x + cos(mAngle*0.017f) * barrelLength) + mTURRET_OFFSET.x;
 		y = (barrelOrigin.y + sin(mAngle*0.017f) * barrelLength) + mTURRET_OFFSET.y;

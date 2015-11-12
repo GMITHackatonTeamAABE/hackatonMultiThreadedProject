@@ -5,6 +5,7 @@
 #include <Box2D/Box2D.h>
 #include <include/Bullet.h>
 #include <vector>
+#include "include\SoundManager.h"
 
 class Tower {
 public:

@@ -1,5 +1,9 @@
 #include <include\Enemy.h>
 
+using namespace std;
+
+#include <iostream>
+
 Enemy::Enemy(float xPos, float yPos, b2World* physicsWorld) {
 	m_sprite.Init("Assets/Enemy.png",
 					SDL_Rect{ (int)xPos, (int)yPos, 100, 100 },
@@ -62,7 +66,9 @@ bool Enemy::checkCollisions() {
 		b2Fixture* a = edge->contact->GetFixtureA();
 		b2Fixture* b = edge->contact->GetFixtureB();
 
+		cout << "check" << endl;
 		if (a->IsSensor() || b->IsSensor()) {
+			cout << "Colliding" << endl;
 			return true;
 		}
 	}
