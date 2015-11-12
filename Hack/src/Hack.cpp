@@ -30,8 +30,40 @@ void ClearPointers();
 
 
 int wmain(){
-	//The window we'll be rendering to
+#pragma region SDL Mixer
+	int audio_rate, audio_channels;
+	Uint16 audio_format;
+	Uint32 t;
+	Mix_Music *music;
+	int volume = SDL_MIX_MAXVOLUME;
 
+	/* initialize SDL for audio and video */
+	if (SDL_Init(SDL_INIT_AUDIO) < 0)
+	{
+		return 1;
+	}
+	atexit(SDL_Quit);
+
+	/* initialize sdl mixer, open up the audio device */
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) < 0)
+	{
+		return 1;
+	}
+
+	/* load the song */
+	if (!(music = Mix_LoadMUS("./assets/bgmus.mp3")))
+	{
+		return 1;
+	}
+
+	if (Mix_PlayMusic(music, 1) == -1)
+	{
+		return 1;
+	}
+#pragma endregion
+
+
+	//The window we'll be rendering to
 	SDL_Window* window = nullptr;
 
 	//SDL
@@ -43,7 +75,7 @@ int wmain(){
 	else
 	{
 		//Create window
-		window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow("Spooky Scary Skeletons", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (window == nullptr)
 		{
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
