@@ -7,9 +7,9 @@ Menu::Menu(int SCREEN_WIDTH, int SCREEN_HEIGHT)
 	SDL_Rect Source = { 0, 0, 1920, 1200 };
 	backGroundImage->Init("Assets/background1.png", destination, Source);
 	backGroundImage->SetOffset(SDL_Point{ SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2 });
-	destination = { SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 4 - 150, 400, 300 };
+	destination = { SCREEN_WIDTH / 2 - 136, SCREEN_HEIGHT / 4 - 84, 272, 166 };
 	playButton.Init(destination, "Assets/PlayButton.png");
-	destination = { SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 4 * 3 - 150, 400, 300 };
+	destination = { SCREEN_WIDTH / 2 - 136, SCREEN_HEIGHT / 4 * 3 - 84, 272, 166 };
 	exitButton.Init(destination, "Assets/ExitButton.png");
 }
 
@@ -24,7 +24,6 @@ bool Menu::Update(SDL_Event e)
 			//Get the mouse offsets
 			int mouse_x = e.button.x;
 			int mouse_y = e.button.y;
-			SoundManager::GetInstance()->play(SoundManager::SHOOT);
 			std::cout << "Mouse Button 1 (left) is pressed. x = " << mouse_x << ", y = " << mouse_y << std::endl;
 			if (playButton.IsClicked(mouse_x, mouse_y)) {
 				GameStateController::GetInstance()->SetGameState(GameStateController::PLAY);

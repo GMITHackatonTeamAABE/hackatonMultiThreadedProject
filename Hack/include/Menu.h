@@ -7,7 +7,6 @@
 #include <SDL.h>
 #include "include\Button.h"
 #include "include\GameStateController.h"
-#include "include\SoundManager.h"
 
 
 class Menu
