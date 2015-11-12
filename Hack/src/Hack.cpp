@@ -1,37 +1,27 @@
 #include <SDL.h>			//SDL
 #include <SDL_ttf.h>
 #include <string>
+#include "include\GameStateController.h"
 #include "include\Renderer.h"
 #include "include\Sprite.h"
 #include "include\KeyBoardInput.h"
+#include "include\Menu.h"
+
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1248;			//SDL
 const int SCREEN_HEIGHT = 704;			//SDL
-										//gamestates
-const int MENU = 0, PLAY = 1, PAUSE = 2, GAMEOVER = 3;
-int gameState;
-
-
-
-
-Sprite* backGroundImage;
-
-
-
+Menu* menu; 										//gamestates
 
 void Init();
 void DrawGame();
-void DrawMenu();
 void UpdateGame();
-bool UpdateMenu(SDL_Event e);
 void Reset();
 void ClearPointers();
 
 
 int wmain()
 {
-	gameState = MENU;
 	//The window we'll be rendering to
 	SDL_Window* window = NULL;
 
@@ -79,16 +69,20 @@ int wmain()
 				}
 
 				//controls gameState added in game menu feature
-				switch (gameState)
+				switch (GameStateController::GetInstance()->getGameState())
 				{
-				case MENU:
+				case GameStateController::MENU:
 					//updateMenu
-					quit = UpdateMenu(e);
+					quit = menu->Update(e);
 					//draw menu
-					DrawMenu();
+					menu->Draw();
 
 					break;
-				case PLAY:
+				case GameStateController::PLAY:
+					UpdateGame();
+					DrawGame();
+					break;
+				case GameStateController::PAUSE:
 					UpdateGame();
 					DrawGame();
 					break;
@@ -110,13 +104,7 @@ int wmain()
 
 void Init()
 {
-
-	gameState = MENU;
-	backGroundImage = new Sprite();
-	SDL_Rect destination = { SCREEN_WIDTH/2 ,SCREEN_HEIGHT/2 , SCREEN_WIDTH, SCREEN_HEIGHT };
-	SDL_Rect Source = { 0, 0, 1240, 720 };
-	backGroundImage->Init("Assets/menu.png", destination, Source);
-	backGroundImage->SetOffset(SDL_Point{ SCREEN_WIDTH/2,SCREEN_HEIGHT/2});
+	menu = new Menu(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 void DrawGame()
 {
@@ -126,36 +114,6 @@ void DrawGame()
 
 
 	Renderer::GetInstance()->RenderScreen();
-}
-void DrawMenu()
-{
-	Renderer::GetInstance()->ClearRenderer();
-
-	/*Call Darw on objects here*/
-	backGroundImage->Draw();
-	
-
-	Renderer::GetInstance()->RenderScreen();
-}
-bool UpdateMenu(SDL_Event e)
-{
-	if (e.type == SDL_MOUSEBUTTONDOWN) {
-		//If the left mouse button was pressed
-		if (e.button.button == SDL_BUTTON_LEFT) {
-			//Get the mouse offsets
-			int mouse_x = e.button.x;
-			int mouse_y = e.button.y;
-			//SDL_Log("Mouse Button 1 (left) is pressed. x = " + x );
-			/*std::cout << "Mouse Button 1 (left) is pressed. x = " << mouse_x << ", y = " << mouse_y << std::endl;
-			if (playButton.IsClicked(mouse_x, mouse_y)) {
-				gameState = PLAY;
-			}
-			else if (exitButton.IsClicked(mouse_x, mouse_y)) {
-				return true; 
-			}*/
-		}
-	}
-	return false;
 }
 void UpdateGame()
 {
@@ -167,5 +125,5 @@ void Reset()
 }
 void ClearPointers()
 {
-	delete backGroundImage;
+	delete menu;
 }

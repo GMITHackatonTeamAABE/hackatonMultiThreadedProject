@@ -1,0 +1,33 @@
+#ifndef _GAMESTATECONTROLLER_H_
+#define _GAMESTATECONTROLLER_H_
+
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <fstream>
+#include <SDL.h>
+
+static class GameStateController
+{
+private:
+	static bool instanceFlag;
+	static GameStateController* instance;
+	GameStateController()
+	{
+		GameState = MENU;
+	}
+	int GameState;
+	
+	
+public:
+	static const int MENU = 0, PLAY = 1, PAUSE = 2, GAMEOVER = 3;
+	static GameStateController* GetInstance();
+	~GameStateController()
+	{
+		instanceFlag = false;
+	}
+	void SetGameState(int);
+	int getGameState();
+
+};
+#endif

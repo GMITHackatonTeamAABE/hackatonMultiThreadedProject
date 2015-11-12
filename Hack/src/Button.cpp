@@ -5,7 +5,7 @@ Button::Button(){
 }
 void Button::Init(SDL_Rect pos, std::string path){
 	rect = pos;
-	SDL_Rect tempSRC{0,0,323,118};
+	SDL_Rect tempSRC{0,0,400,300};
 	m_sprite = new Sprite();
 	m_sprite->Init(path, pos, tempSRC);
 }
