@@ -37,6 +37,9 @@
     <ClCompile Include="src\EnemyManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\floor.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Bullet.h">
@@ -70,6 +73,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="include\EnemyManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\floor.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

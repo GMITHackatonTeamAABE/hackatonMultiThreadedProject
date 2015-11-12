@@ -13,45 +13,25 @@ private:
 	b2Vec2 m_position;
 	//b2Vec2 m_velocity;
 	float SCALE = 0.3f;
-
-	b2World* world;
 	b2Body* bulletBody;
 	Sprite* sprite;
 
 	float initX = 0;
 	float initY = 0;
 	
-	bool fire = false;
+	//bool fire = false;
 
 	SDL_Rect spriteRect;
 public:
-	Bullet(float x, float y, b2World* World);
-	void Update(float dir); 
-	void CreateBody();
+	Bullet(float x, float y, b2World* World, float dir, float power);
+	void Update(); 
+	//void CreateBody();
 	//bool CheckLife();
-	void Fire(float dir);
+	//void Fire(float dir, float power);
 	bool CheckCollision(SDL_Rect* rect);
-	void Draw();
+	void Draw() const;
 
 	~Bullet(); 
 };
-
-/*
-class BulletManager {
-private:
-	static bool instanceFlag;
-	BulletManager() { }
-	list<Bullet> bullets;
-public:
-	static BulletManager* getInstance();
-	void Update();
-	void add(Bullet bullet) {
-		bullets.add(new Bullet(x,y, world));
-	}
-	~BulletManager() {
-		instanceFlag = false;
-	}
-};
-*/
 
 #endif

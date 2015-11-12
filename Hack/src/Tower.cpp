@@ -1,13 +1,15 @@
 #include <include/Tower.h>
 
-Tower::Tower(b2World &world, float _posX, float _posY):
+Tower::Tower(b2World *_world, float _posX, float _posY):
 	mAngle(180),
 	mTURRET_OFFSET(40, 20),
 	mBUILDING_OFFSET(-40, -222),
 	mMAX_ANGLE(270),
 	mMIN_ANGLE(150),
+	mPOWER(10000000),
 	posX(_posX),
-	posY(_posY)
+	posY(_posY),
+	worldPtr(_world)
 {
 	mBodySprite.Init("./assets/base.png",
 		SDL_Rect{ int(posX),int(posY),76,43 },
@@ -42,7 +44,7 @@ Tower::Tower(b2World &world, float _posX, float _posY):
 	mFixDef.isSensor = false;
 	mFixDef.shape = &mShape;
 
-	mBodyPtr = world.CreateBody(&mBodyDef);
+	mBodyPtr = worldPtr->CreateBody(&mBodyDef);
 	mBodyPtr->CreateFixture(&mFixDef);
 }
 
@@ -53,6 +55,12 @@ Tower::~Tower()
 void Tower::draw()
 {
 	mBuildingSprite.Draw();
+
+	for(Bullet* b : mBullets)
+	{
+		b->Draw();
+	}
+
 	mTurretSprite.Draw();
 	mBodySprite.Draw();
 }
@@ -102,7 +110,7 @@ void normalize(float& x, float& y)
 //	std::cout << "Angle: " << mAngle << std::endl;
 //}
 
-void Tower::update(bool angleUp, bool angleDown)
+void Tower::update(bool angleUp, bool angleDown, bool fire)
 {
 	if(angleUp && mAngle > mMIN_ANGLE)
 	{
@@ -113,4 +121,20 @@ void Tower::update(bool angleUp, bool angleDown)
 	}
 
 	mTurretSprite.SetRotation(mAngle);
+
+	if(fire && !fired)
+	{
+		mBullets.push_back(new Bullet(posX, posY, worldPtr, mAngle, mPOWER));
+		fired = true;
+	}
+
+	if(!fire)
+	{
+		fired = false;
+	}
+
+	for(Bullet* b : mBullets)
+	{
+		b->Update();
+	}
 }

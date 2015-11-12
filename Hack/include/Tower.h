@@ -3,14 +3,15 @@
 
 #include "Sprite.h"
 #include <Box2D/Box2D.h>
-#include <queue>
+#include <include/Bullet.h>
+#include <vector>
 
 class Tower {
 public:
-	Tower(b2World &world, float posX, float posY);
+	Tower(b2World *world, float posX, float posY);
 	virtual ~Tower();
 
-	virtual void update(bool angleUp, bool angleDown);
+	virtual void update(bool angleUp, bool angleDown, bool fire);
 	virtual void draw();
 	//virtual Projectile* fire();
 
@@ -25,6 +26,7 @@ protected:
 
 	const b2Vec2 mTURRET_OFFSET, mBUILDING_OFFSET;
 	const double mMAX_ANGLE, mMIN_ANGLE;
+	const float mPOWER;
 
 	float posX, posY;
 
@@ -32,6 +34,10 @@ protected:
 	b2BodyDef mBodyDef;
 	b2FixtureDef mFixDef;
 
-	//std::queue<Projectile> mProjectiles;
+	bool fired;
+
+	std::vector<Bullet*> mBullets;
+
+	b2World* worldPtr;
 };
 #endif
