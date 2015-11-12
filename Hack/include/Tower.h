@@ -29,6 +29,8 @@ protected:
 	const float mPOWER;
 
 	float posX, posY;
+	b2Vec2 barrelOrigin;
+	float barrelLength;
 
 	b2PolygonShape mShape;
 	b2BodyDef mBodyDef;

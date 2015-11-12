@@ -9,6 +9,8 @@ Tower::Tower(b2World *_world, float _posX, float _posY):
 	mPOWER(10000000),
 	posX(_posX),
 	posY(_posY),
+	barrelOrigin(0,4),
+	barrelLength(49),
 	worldPtr(_world)
 {
 	mBodySprite.Init("./assets/base.png",
@@ -124,7 +126,10 @@ void Tower::update(bool angleUp, bool angleDown, bool fire)
 
 	if(fire && !fired)
 	{
-		mBullets.push_back(new Bullet(posX, posY, worldPtr, mAngle, mPOWER));
+		double x, y;
+		x = (barrelOrigin.x + cos(mAngle*0.017f) * barrelLength) + mTURRET_OFFSET.x;
+		y = (barrelOrigin.y + sin(mAngle*0.017f) * barrelLength) + mTURRET_OFFSET.y;
+		mBullets.push_back(new Bullet(posX + x, posY + y, worldPtr, mAngle, mPOWER));
 		fired = true;
 	}
 
