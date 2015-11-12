@@ -1,9 +1,9 @@
 #include <include\Enemy.h>
 
 Enemy::Enemy(float xPos, float yPos, b2World* physicsWorld) {
-	m_sprite.Init("Assest\bulletTemp.png",
+	m_sprite.Init("Assets/Enemy.png",
 					SDL_Rect{ (int)xPos, (int)yPos, 100, 100 },
-					SDL_Rect{ 0, 0, 100, 100 });
+					SDL_Rect{ 0, 0, 50, 73 });
 	
 	m_bodyDef.type = b2_dynamicBody;
 	m_bodyDef.position.Set(xPos, yPos);
