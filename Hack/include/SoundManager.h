@@ -1,4 +1,3 @@
-
 #ifndef SOUNDMANAGER_H
 #define SOUNDMANAGER_H
 
@@ -7,6 +6,8 @@
 #include <stdio.h>
 #include "SDL_mixer.h"
 #include <list>
+
+#pragma comment(lib, "SDL2_mixer.lib")
 
 using namespace std;
 
