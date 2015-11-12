@@ -38,9 +38,6 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="src\floor.cpp">
-	<Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BulletManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,10 +75,10 @@
     <ClInclude Include="include\EnemyManager.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\floor.h">
+    <ClInclude Include="include\BulletManager.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\BulletManager.h">
+    <ClInclude Include="include\floor.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

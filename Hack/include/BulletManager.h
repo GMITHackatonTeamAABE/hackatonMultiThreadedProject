@@ -8,15 +8,21 @@
 class BulletManager {
 private:
 	static bool instanceFlag;
-	BulletManager() { }
+
+	BulletManager::BulletManager() { 
 	
+	}
 public:
-	static BulletManager* getInstance();
-	void Update();
-	void add(Bullet bullet) {
+	static BulletManager* BulletManager::getInstance() {
+
+	}
+	void BulletManager::Update() {
+
+	}
+	void BulletManager::add(Bullet bullet) {
 		//bullets.add(new Bullet(x,y, world));
 	}
-	~BulletManager() {
+	BulletManager::~BulletManager() {
 		instanceFlag = false;
 	}
 };
