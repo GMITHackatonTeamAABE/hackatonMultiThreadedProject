@@ -8,26 +8,26 @@
 #include "include\Sprite.h"
 #include "include\KeyBoardInput.h"
 #include "include\Menu.h"
+#include "include\Play.h"
 #include <Box2D/Box2D.h>
-#include <include/Tower.h>
+
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1248;			//SDL
 const int SCREEN_HEIGHT = 704;			//SDL
 
-Menu* menu; 									
+Menu* menu;
+Play* play;
+b2World world(b2Vec2_zero);
 
 
 
 
-Tower* tower;
 
 int mouseX, mouseY;
 
 
 void Init();
-void DrawGame();
-void UpdateGame();
 void Reset();
 void ClearPointers();
 
@@ -95,12 +95,12 @@ int wmain()
 
 					break;
 				case GameStateController::PLAY:
-					UpdateGame();
-					DrawGame();
+					
+					play->Update();
+					play->Draw();
 					break;
 				case GameStateController::PAUSE:
-					UpdateGame();
-					DrawGame();
+					
 					break;
 				}//end switch
 
@@ -122,22 +122,9 @@ void Init()
 {
 
 	menu = new Menu(SCREEN_WIDTH, SCREEN_HEIGHT);
-	b2World world = b2World(b2Vec2_zero);
-	tower = new Tower(world, 100, 100);
+	play = new Play(&world,SCREEN_WIDTH, SCREEN_HEIGHT);
+	
 
-}
-void DrawGame()
-{
-	Renderer::GetInstance()->ClearRenderer();
-
-	/*Call Darw on objects here*/
-	tower->draw();
-
-	Renderer::GetInstance()->RenderScreen();
-}
-void UpdateGame()
-{
-	tower->update(1.0f, 0, 1);
 }
 void Reset()
 {
@@ -146,5 +133,6 @@ void Reset()
 void ClearPointers()
 {
 	delete menu;
-	delete tower;
+	delete play;
+	
 }

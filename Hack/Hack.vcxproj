@@ -171,6 +171,7 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     <ClInclude Include="include\KeyBoardInput.h" />
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Bullet.h" />
+    <ClInclude Include="include\Play.h" />
     <ClInclude Include="include\Renderer.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\Tower.h" />
@@ -183,8 +184,9 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Button.cpp">
-	<PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Play.cpp" />
     <ClCompile Include="src\Tower.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>

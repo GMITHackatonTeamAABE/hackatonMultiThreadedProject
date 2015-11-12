@@ -1,5 +1,5 @@
-#ifndef _MENU_H_
-#define _MENU_H_
+#ifndef _PLAY_H_
+#define _PLAY_H_
 
 #include <iostream>
 #include <stdio.h>
@@ -9,21 +9,19 @@
 #include "include\GameStateController.h"
 
 
-static class Menu
+static class Play
 {
 private:
-	Button playButton;
-	Button exitButton;
 	Sprite* backGroundImage;
 public:
 
-	Menu(int w,int h);
-	~Menu()
+	Play(int w, int h);
+	~Play()
 	{
 		delete backGroundImage;
 	}
 	void Init();
-	bool Update(SDL_Event e);
+	bool Update();
 	void Draw();
 
 

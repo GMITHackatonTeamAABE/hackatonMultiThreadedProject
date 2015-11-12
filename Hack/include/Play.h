@@ -1,29 +1,33 @@
-#ifndef _MENU_H_
-#define _MENU_H_
+#ifndef _PLAY_H_
+#define _PLAY_H_
 
 #include <iostream>
 #include <stdio.h>
 
 #include <SDL.h>
+#include <Box2D/Box2D.h>
 #include "include\Button.h"
 #include "include\GameStateController.h"
+#include <include/Tower.h>
 
 
-static class Menu
+static class Play
 {
 private:
-	Button playButton;
-	Button exitButton;
 	Sprite* backGroundImage;
+	Tower* tower;
+	b2World* world;
 public:
 
-	Menu(int w,int h);
-	~Menu()
+	Play(b2World*,int w, int h);
+	~Play()
 	{
 		delete backGroundImage;
+		delete tower;
 	}
 	void Init();
-	bool Update(SDL_Event e);
+	
+	void Update();
 	void Draw();
 
 
