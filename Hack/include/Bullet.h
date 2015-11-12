@@ -28,6 +28,10 @@ public:
 	//void CreateBody();
 	//bool CheckLife();
 	//void Fire(float dir, float power);
+	Bullet(float x, float y, b2World& World);
+	void CreateBody();
+	void Fire(float dir);
+	void setPosition(float x, float y);
 	bool CheckCollision(SDL_Rect* rect);
 	void Draw() const;
 

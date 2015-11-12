@@ -33,13 +33,16 @@ Bullet::Bullet(float x, float y, b2World* world, float dir, float power) {
 void Bullet::Update() {
 	sprite->SetPosition(bulletBody->GetPosition().x, bulletBody->GetPosition().y);
 	sprite->SetRotation(bulletBody->GetAngle());
+
 	//sprite->SetDestinationRect(spriteRect);
+
 }
 
-bool Bullet::CheckCollision(SDL_Rect* rect) {
-	
-	return false;
+void Bullet::setPosition(float x, float y) {
+	m_position.x = x;
+	m_position.y = y;
 }
+
 
 //void Bullet::Fire(float dir, float power) {
 //	fire = true;
