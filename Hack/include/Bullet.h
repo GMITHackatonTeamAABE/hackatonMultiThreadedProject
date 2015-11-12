@@ -19,17 +19,21 @@ private:
 	float initX = 0;
 	float initY = 0;
 	
-	bool fire = false;
+	//bool fire = false;
 
 	SDL_Rect spriteRect;
 public:
-	Bullet(float x, float y, b2World& World);
-	void Update(float dir); 
-	void CreateBody();
+	Bullet(float x, float y, b2World* World, float dir, float power);
+	void Update(); 
+	//void CreateBody();
 	//bool CheckLife();
+	//void Fire(float dir, float power);
+	Bullet(float x, float y, b2World& World);
+	void CreateBody();
 	void Fire(float dir);
+	void setPosition(float x, float y);
 	bool CheckCollision(SDL_Rect* rect);
-	void Draw();
+	void Draw() const;
 
 	~Bullet(); 
 };
