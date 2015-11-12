@@ -17,6 +17,10 @@ private:
 	b2BodyDef m_bodyDef;
 	b2FixtureDef m_fixtureDef;
 	b2PolygonShape m_shape;
+	const int WALKING_ANIMATION_FRAMES = 9;
+	SDL_Rect gSpriteClips[9];
+	int frame;
+	int animationUpdate;
 };
 
 #endif
