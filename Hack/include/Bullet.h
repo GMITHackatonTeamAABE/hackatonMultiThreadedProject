@@ -34,22 +34,4 @@ public:
 	~Bullet(); 
 };
 
-/*
-class BulletManager {
-private:
-	static bool instanceFlag;
-	BulletManager() { }
-	list<Bullet> bullets;
-public:
-	static BulletManager* getInstance();
-	void Update();
-	void add(Bullet bullet) {
-		bullets.add(new Bullet(x,y, world));
-	}
-	~BulletManager() {
-		instanceFlag = false;
-	}
-};
-*/
-
 #endif
