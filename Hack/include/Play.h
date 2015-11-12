@@ -8,6 +8,9 @@
 #include <Box2D/Box2D.h>
 #include "include\Button.h"
 #include "include\GameStateController.h"
+#include <include\KeyBoardInput.h>
+#include <include\Tower.h>
+#include <include\Bullet.h>
 #include <include/KeyBoardInput.h>
 #include <include/Tower.h>
 #include "include\Bullet.h"
