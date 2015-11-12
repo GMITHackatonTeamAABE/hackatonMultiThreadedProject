@@ -22,11 +22,6 @@ void Bullet::Update(float dir) {
 	sprite->SetDestinationRect(spriteRect);
 }
 
-
-/*bool Bullet::CheckLife() {
-	return true;
-}*/
-
 bool Bullet::CheckCollision(SDL_Rect* rect) {
 	
 	return false;
