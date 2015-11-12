@@ -13,7 +13,7 @@ Play::Play(b2World* w, int SCREEN_WIDTH, int SCREEN_HEIGHT) :
 
 	tower = new Tower(*world, 1000, 200);
 	floor = new Floor(world, SDL_Rect{0,SCREEN_HEIGHT,SCREEN_WIDTH,10});
-	EnemyManager::GetInstance()->AddEnemy(10, 10, world);
+	EnemyManager::GetInstance()->AddEnemy(10, 654, world);
 }
 
 void Play::Init()

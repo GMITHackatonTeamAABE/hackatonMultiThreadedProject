@@ -5,7 +5,7 @@ Enemy::Enemy(float xPos, float yPos, b2World* physicsWorld) {
 					SDL_Rect{ (int)xPos, (int)yPos, 100, 100 },
 					SDL_Rect{ 0, 0, 47, 73 });
 	m_sprite.SetOffset(SDL_Point{ 50,50 });
-	m_bodyDef.type = b2_dynamicBody;
+	m_bodyDef.type = b2_kinematicBody;
 	m_bodyDef.position.Set(xPos, yPos);
 	m_body = physicsWorld->CreateBody(&m_bodyDef);
 
@@ -15,7 +15,7 @@ Enemy::Enemy(float xPos, float yPos, b2World* physicsWorld) {
 	m_fixtureDef.friction = 100;
 	m_body->CreateFixture(&m_fixtureDef);
 
-	m_velocity = b2Vec2(10, 0);
+	m_velocity = b2Vec2(100, 0);
 
 	frame = 0;
 	gSpriteClips[WALKING_ANIMATION_FRAMES];
