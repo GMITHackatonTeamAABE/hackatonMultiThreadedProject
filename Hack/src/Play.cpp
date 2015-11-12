@@ -5,7 +5,7 @@ Play::Play(b2World* w, int SCREEN_WIDTH, int SCREEN_HEIGHT) :
 	clockInit(false)
 {
 	world = w;
-	bullet = new Bullet(990, 210, world);
+	bullet = new Bullet(990, 210, *world);
 	backGroundImage = new Sprite();
 	SDL_Rect destination = { SCREEN_WIDTH / 2 ,SCREEN_HEIGHT / 2 , SCREEN_WIDTH, SCREEN_HEIGHT };
 	SDL_Rect Source = { 0, 0, 969, 545 };
@@ -47,6 +47,7 @@ void Play::Draw() const
 	backGroundImage->Draw();
 	tower->draw();
 	EnemyManager::GetInstance()->Draw();
+	bullet->Fire(5.0f);
 	bullet->Draw();
 	Renderer::GetInstance()->RenderScreen();
 }

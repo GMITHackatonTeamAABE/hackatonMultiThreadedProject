@@ -13,8 +13,6 @@ private:
 	b2Vec2 m_position;
 	//b2Vec2 m_velocity;
 	float SCALE = 0.3f;
-
-	b2World* world;
 	b2Body* bulletBody;
 	Sprite* sprite;
 
@@ -25,7 +23,7 @@ private:
 
 	SDL_Rect spriteRect;
 public:
-	Bullet(float x, float y, b2World* World);
+	Bullet(float x, float y, b2World& World);
 	void Update(float dir); 
 	void CreateBody();
 	//bool CheckLife();
