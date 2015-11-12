@@ -3,6 +3,7 @@
 #include <SDL.h>			//SDL
 #include <SDL_ttf.h>
 #include <string>
+#include <chrono>
 #include <Box2D/Box2D.h>
 #include <include\Renderer.h>
 #include <include\Sprite.h>
@@ -23,7 +24,9 @@ Sprite* backGroundImage;
 Tower* tower;
 
 int mouseX, mouseY;
-
+std::chrono::steady_clock myClock;
+chrono::time_point<chrono::steady_clock> lastTickTime, lastFrameTime;
+const auto TIME_PER_TICK = chrono::milliseconds(16);
 
 
 void Init();
@@ -134,6 +137,8 @@ void Init()
 	backGroundImage->SetOffset(SDL_Point{ SCREEN_WIDTH/2,SCREEN_HEIGHT/2});
 
 	tower = new Tower(world, 100, 100);
+
+	lastTickTime = lastFrameTime = myClock.now();
 }
 void DrawGame()
 {
@@ -176,7 +181,15 @@ bool UpdateMenu(SDL_Event e)
 }
 void UpdateGame()
 {
-	tower->update(1.0f, 0, 1);
+	//fixed timestep
+	while (myClock.now() > lastTickTime + TIME_PER_TICK) {
+		lastTickTime += TIME_PER_TICK;
+
+		tower->update(1.0f,
+			KeyBoardInput::GetInstance()->isKeyPressed(SDLK_LEFT),
+			KeyBoardInput::GetInstance()->isKeyPressed(SDLK_RIGHT)
+			);
+	}
 }
 void Reset()
 {
