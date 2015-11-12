@@ -18,27 +18,17 @@ const int SCREEN_HEIGHT = 704;			//SDL
 
 Menu* menu;
 Play* play;
-b2World world(b2Vec2_zero);
-
-
-
-
+b2World world(b2Vec2(0,9.81));
 
 int mouseX, mouseY;
-
 
 void Init();
 void Reset();
 void ClearPointers();
 
-
-int wmain()
-{
+int wmain(){
 	//The window we'll be rendering to
 	SDL_Window* window = NULL;
-
-	//SDL
-#pragma region SDL STUFF
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -63,9 +53,6 @@ int wmain()
 			bool quit = false;
 			Init();
 
-
-
-
 			SDL_Event e;
 			while (!quit)
 			{
@@ -79,7 +66,6 @@ int wmain()
 					case SDL_MOUSEMOTION:
 						mouseX = e.motion.x;
 						mouseY = e.motion.y;
-						std::cout << "X: " << mouseX << "\tY: " << mouseY << std::endl;
 						break;
 					}
 				}
@@ -105,12 +91,11 @@ int wmain()
 				}//end switch
 
 				 // Escape button
-				if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_ESCAPE))
-				{
+				if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_ESCAPE)){
 					quit = true;
 				}
 
-			}//end while wuit
+			}//end while wait
 		}//end else
 	}//end else
 
@@ -118,21 +103,15 @@ int wmain()
 	return 0;
 }
 
-void Init()
-{
-
+void Init(){
 	menu = new Menu(SCREEN_WIDTH, SCREEN_HEIGHT);
 	play = new Play(&world,SCREEN_WIDTH, SCREEN_HEIGHT);
-	
-
 }
-void Reset()
-{
 
+void Reset(){
 }
-void ClearPointers()
-{
+
+void ClearPointers(){
 	delete menu;
 	delete play;
-	
 }

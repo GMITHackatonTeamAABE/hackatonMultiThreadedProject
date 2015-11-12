@@ -12,18 +12,18 @@ Play::Play(b2World* w, int SCREEN_WIDTH, int SCREEN_HEIGHT)
 	EnemyManager::GetInstance()->AddEnemy(10, 10, world);
 }
 
-void Play::Init()
-{
+void Play::Init(){
 }
-void Play::Update()
-{
+
+void Play::Update(){
 	tower->update(1.0f, 0, 1);
+	world->Step(60,30,60);
 }
-void Play::Draw()
-{
+
+void Play::Draw(){
 	Renderer::GetInstance()->ClearRenderer();
 
-	/*Call Darw on objects here*/
+	/*Call Draw on objects here*/
 	backGroundImage->Draw();
 	tower->draw();
 	EnemyManager::GetInstance()->Draw();
