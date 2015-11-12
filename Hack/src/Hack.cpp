@@ -20,8 +20,9 @@ const int SCREEN_HEIGHT = 704;			//SDL
 
 Menu* menu;
 Play* play;
-b2World world(b2Vec2(0,9.81));
 bool quit;
+
+b2World world(b2Vec2(0,30));
 
 void Init();
 void Reset();

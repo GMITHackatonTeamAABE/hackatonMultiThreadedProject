@@ -167,7 +167,6 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\BulletManager.h" />
     <ClInclude Include="include\EnemyManager.h" />
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\Enemy.h" />

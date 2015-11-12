@@ -47,7 +47,7 @@ public:
 	
 	void Update();
 	void Draw() const;
-
+	int timeSinceGameStartInMS;
 	void UpdateMousePos(int x, int y);
 };
 #endif

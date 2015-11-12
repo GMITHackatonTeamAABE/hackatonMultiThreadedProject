@@ -78,9 +78,6 @@
     <ClInclude Include="include\EnemyManager.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\BulletManager.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="include\floor.h">
       <Filter>Headers</Filter>
     </ClInclude>
