@@ -1,4 +1,4 @@
-#include <EnemyManager.h>
+#include <include/EnemyManager.h>
 
 bool EnemyManager::instanceFlag = false;
 EnemyManager* EnemyManager::instance = NULL;

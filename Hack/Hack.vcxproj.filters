@@ -31,10 +31,10 @@
     <ClCompile Include="src\Play.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyManager.cpp">
+    <ClCompile Include="src\Enemy.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\Enemy.cpp">
+    <ClCompile Include="src\EnemyManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,10 +66,10 @@
     <ClInclude Include="include\Play.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyManager.h">
+    <ClInclude Include="include\Enemy.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="include\Enemy.h">
+    <ClInclude Include="include\EnemyManager.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

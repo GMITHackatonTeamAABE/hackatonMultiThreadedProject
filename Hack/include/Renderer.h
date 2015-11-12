@@ -7,7 +7,7 @@
 #include <fstream>
 #include <SDL.h>
 
-static class Renderer
+class Renderer
 {
 private:
 	static bool instanceFlag;
