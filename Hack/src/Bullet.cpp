@@ -26,8 +26,18 @@ Bullet::Bullet(float x, float y, b2World* world, float dir, float power) {
 
 void Bullet::Update() {
 	sprite->SetPosition(bulletBody->GetPosition().x, bulletBody->GetPosition().y);
+<<<<<<< HEAD
 	sprite->SetRotation(bulletBody->GetAngle());
 	//sprite->SetDestinationRect(spriteRect);
+=======
+	sprite->SetDestinationRect(spriteRect);
+
+}
+
+void Bullet::setPosition(float x, float y) {
+	m_position.x = x;
+	m_position.y = y;
+>>>>>>> 57a9dddd7d09eafa50d0e94caa7eb67513d373de
 }
 
 bool Bullet::CheckCollision(SDL_Rect* rect) {

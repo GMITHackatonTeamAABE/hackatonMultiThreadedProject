@@ -180,6 +180,7 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     <ClInclude Include="include\Tower.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BulletManager.cpp" />
     <ClCompile Include="src\EnemyManager.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\floor.cpp" />

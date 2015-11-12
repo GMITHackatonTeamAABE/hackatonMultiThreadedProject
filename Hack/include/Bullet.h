@@ -23,11 +23,19 @@ private:
 
 	SDL_Rect spriteRect;
 public:
+<<<<<<< HEAD
 	Bullet(float x, float y, b2World* World, float dir, float power);
 	void Update(); 
 	//void CreateBody();
 	//bool CheckLife();
 	//void Fire(float dir, float power);
+=======
+	Bullet(float x, float y, b2World& World);
+	void Update(); 
+	void CreateBody();
+	void Fire(float dir);
+	void setPosition(float x, float y);
+>>>>>>> 57a9dddd7d09eafa50d0e94caa7eb67513d373de
 	bool CheckCollision(SDL_Rect* rect);
 	void Draw() const;
 
