@@ -7,10 +7,13 @@ Play::Play(b2World* w, int SCREEN_WIDTH, int SCREEN_HEIGHT) :
 	world = w;
 	backGroundImage = new Sprite();
 	SDL_Rect destination = { SCREEN_WIDTH / 2 ,SCREEN_HEIGHT / 2 , SCREEN_WIDTH, SCREEN_HEIGHT };
-	SDL_Rect Source = { 0, 0, 1920, 1200 };
-	backGroundImage->Init("Assets/background.png", destination, Source);
+	SDL_Rect Source = { 0, 0, 969, 545 };
+	backGroundImage->Init("Assets/GameBackground.png", destination, Source);
 	backGroundImage->SetOffset(SDL_Point{ SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2 });
+
 	tower = new Tower(*world, 1000, 200);
+
+	EnemyManager::GetInstance()->AddEnemy(10, 10, world);
 }
 
 void Play::Init()
@@ -42,6 +45,7 @@ void Play::Draw() const
 	/*Call Darw on objects here*/
 	backGroundImage->Draw();
 	tower->draw();
+	EnemyManager::GetInstance()->Draw();
 
 	Renderer::GetInstance()->RenderScreen();
 }
