@@ -96,7 +96,7 @@ int wmain(){
 				if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_ESCAPE)){
 					quit = true;
 				}
-
+				world.DrawDebugData();
 			}//end while wait
 		}//end else
 	}//end else

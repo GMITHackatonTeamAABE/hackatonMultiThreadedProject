@@ -16,21 +16,25 @@ Bullet::Bullet(float x, float y, b2World* world, float dir, float power) {
 	bodyDef.userData = this;
 	bodyDef.position.x = m_position.x;
 	bodyDef.position.y = m_position.y;
+	
+	b2FixtureDef fixDef;
+	b2PolygonShape shape;
+	shape.SetAsBox(10, 10);
+	fixDef.isSensor = true;
+	fixDef.shape = &shape;
 
 	bulletBody = world->CreateBody(&bodyDef);
 
 	dir *= 0.017f;	//degrees to radians
 	//launch the bullet
-	bulletBody->SetLinearVelocity(b2Vec2(cosf(dir) * power, sinf(dir) * power));
+	bulletBody->SetLinearVelocity(b2Vec2(cos(dir) * power, sin(dir) * power));
 }
 
 void Bullet::Update() {
 	sprite->SetPosition(bulletBody->GetPosition().x, bulletBody->GetPosition().y);
-
 	sprite->SetRotation(bulletBody->GetAngle());
-	//sprite->SetDestinationRect(spriteRect);
 
-	sprite->SetDestinationRect(spriteRect);
+	//sprite->SetDestinationRect(spriteRect);
 
 }
 
