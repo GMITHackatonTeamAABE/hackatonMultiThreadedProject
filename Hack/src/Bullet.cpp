@@ -29,11 +29,14 @@ bool Bullet::CheckCollision(SDL_Rect* rect) {
 }
 
 void Bullet::Fire(float dir) {
-	
+	fire = true;
+	// apply force
 }
 
 void Bullet::Draw() { // sprite.Draw();
-	sprite->Draw();
+	if (fire)
+		sprite->Draw();
+	else {}
 }
 
 Bullet::~Bullet() {

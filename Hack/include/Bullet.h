@@ -20,6 +20,8 @@ private:
 
 	float initX = 0;
 	float initY = 0;
+	
+	bool fire = false;
 
 	SDL_Rect spriteRect;
 public:
