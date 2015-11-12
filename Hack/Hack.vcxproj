@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir);$(SDL)/include;$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SDL)/lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(BOX2D);$(SDL)/include;$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOX2D);$(SDL)/lib/x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -89,7 +89,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -105,7 +105,7 @@
 xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copy SDL dyanamic library to deployment folder</Message>
+      <Message>Copy SDL dynamic library to deployment folder</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -142,7 +142,7 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
 xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copy SDL dyanamic library to deployment folder</Message>
+      <Message>Copy SDL dynamic library to deployment folder</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -173,6 +173,7 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Renderer.h" />
     <ClInclude Include="include\Sprite.h" />
+    <ClInclude Include="include\Tower.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GameStateController.cpp">
@@ -182,6 +183,9 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Button.cpp">
+	<PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Tower.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Hack.cpp">

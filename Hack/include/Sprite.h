@@ -22,7 +22,7 @@ public :
 	void SetRotation(double rot);
 	void Draw();
 
-private:
+protected:
 	SDL_Texture* loadTexture(std::string path, SDL_Renderer*);
 	SDL_Texture* myTexture;
 	SDL_Point m_offset;

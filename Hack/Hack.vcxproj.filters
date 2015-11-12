@@ -36,6 +36,9 @@
     </ClInclude>
     <ClInclude Include="include\Menu.h">
     <ClInclude Include="include\KeyBoardInput.h">
+	  <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tower.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -61,6 +64,9 @@
     </ClCompile>
     <ClCompile Include="src\Menu.cpp">
     <ClCompile Include="src\KeyBoardInput.cpp">
+	  <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
