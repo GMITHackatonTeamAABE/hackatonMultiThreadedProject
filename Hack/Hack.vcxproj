@@ -166,20 +166,27 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Button.h" />
+    <ClInclude Include="include\GameStateController.h" />
     <ClInclude Include="include\KeyBoardInput.h" />
+    <ClInclude Include="include\Menu.h" />
+    <ClInclude Include="include\Bullet.h" />
+    <ClInclude Include="include\Play.h" />
     <ClInclude Include="include\Renderer.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\Tower.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameStateController.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Bullet.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Button.cpp">
-	<PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Play.cpp" />
     <ClCompile Include="src\Tower.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -187,6 +194,9 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\KeyBoardInput.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Menu.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Renderer.cpp">

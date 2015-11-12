@@ -1,12 +1,12 @@
 #include <include/Tower.h>
 
 Tower::Tower(b2World &world, float _posX, float _posY):
-	mAngle(0),
-	mTURRET_OFFSET(30, 10),
+	mAngle(180),
+	mTURRET_OFFSET(40, 20),
 	posX(_posX),
 	posY(_posY),
-	mMAX_ANGLE(20),
-	mMIN_ANGLE(-75)
+	mMAX_ANGLE(270),
+	mMIN_ANGLE(150)
 {
 	mBodySprite.Init("./assets/base.png",
 		SDL_Rect{ int(posX),int(posY),76,43 },
@@ -60,11 +60,11 @@ void normalize(float& x, float& y)
 	y /= length;
 }
 
-float toDegrees(float radians)
-{
-	return radians * 57.2958f;
-}
-
+//float toDegrees(float radians)
+//{
+//	return radians * 57.2958f;
+//}
+//
 //void Tower::update(float timestep, float targetX, float targetY)
 //{
 //	targetX -= posX;

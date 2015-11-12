@@ -4,45 +4,33 @@
 #include <SDL_ttf.h>
 #include <string>
 #include <chrono>
+#include "include\GameStateController.h"
+#include "include\Renderer.h"
+#include "include\Sprite.h"
+#include "include\KeyBoardInput.h"
+#include "include\Menu.h"
+#include "include\Play.h"
 #include <Box2D/Box2D.h>
-#include <include\Renderer.h>
-#include <include\Sprite.h>
-#include <include\KeyBoardInput.h>
-#include <include/Tower.h>
+
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1248;			//SDL
 const int SCREEN_HEIGHT = 704;			//SDL
-										//gamestates
-const int MENU = 0, PLAY = 1, PAUSE = 2, GAMEOVER = 3;
-int gameState;
 
-
-
-
-Sprite* backGroundImage;
-Tower* tower;
-
-int mouseX, mouseY;
-std::chrono::steady_clock myClock;
-chrono::time_point<chrono::steady_clock> lastTickTime, lastFrameTime;
-const auto TIME_PER_TICK = chrono::milliseconds(16);
+Menu* menu;
+Play* play;
+b2World world(b2Vec2_zero);
 
 
 void Init();
-void DrawGame();
-void DrawMenu();
-void UpdateGame();
-bool UpdateMenu(SDL_Event e);
 void Reset();
 void ClearPointers();
 
 
 int wmain()
 {
-	gameState = MENU;
 	//The window we'll be rendering to
-	SDL_Window* window = NULL;
+	SDL_Window* window = nullptr;
 
 	//SDL
 #pragma region SDL STUFF
@@ -55,7 +43,7 @@ int wmain()
 	{
 		//Create window
 		window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-		if (window == NULL)
+		if (window == nullptr)
 		{
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 		}
@@ -84,26 +72,25 @@ int wmain()
 						quit = true;
 						break;
 					case SDL_MOUSEMOTION:
-						mouseX = e.motion.x;
-						mouseY = e.motion.y;
-						std::cout << "X: " << mouseX << "\tY: " << mouseY << std::endl;
+						play->UpdateMousePos(e.motion.x, e.motion.y);
 						break;
 					}
 				}
 
 				//controls gameState added in game menu feature
-				switch (gameState)
+				switch (GameStateController::GetInstance()->getGameState())
 				{
-				case MENU:
+				case GameStateController::MENU:
 					//updateMenu
-					quit = UpdateMenu(e);
+					quit = menu->Update(e);
 					//draw menu
-					DrawMenu();
-
+					menu->Draw();
 					break;
-				case PLAY:
-					UpdateGame();
-					DrawGame();
+				case GameStateController::PLAY:
+					play->Update();
+					play->Draw();
+					break;
+				case GameStateController::PAUSE:
 					break;
 				}//end switch
 
@@ -111,11 +98,6 @@ int wmain()
 				if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_ESCAPE))
 				{
 					quit = true;
-				}
-				else if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_RETURN))
-				{
-					gameState = PLAY;
-					lastTickTime = lastFrameTime = myClock.now();
 				}
 
 			}//end while wuit
@@ -128,67 +110,10 @@ int wmain()
 
 void Init()
 {
-	b2World world = b2World(b2Vec2_zero);
 
-	gameState = MENU;
-	backGroundImage = new Sprite();
-	SDL_Rect destination = { SCREEN_WIDTH/2 ,SCREEN_HEIGHT/2 , SCREEN_WIDTH, SCREEN_HEIGHT };
-	SDL_Rect Source = { 0, 0, 1240, 720 };
-	backGroundImage->Init("Assets/menu.png", destination, Source);
-	backGroundImage->SetOffset(SDL_Point{ SCREEN_WIDTH/2,SCREEN_HEIGHT/2});
-
-	tower = new Tower(world, 100, 100);
-}
-void DrawGame()
-{
-	Renderer::GetInstance()->ClearRenderer();
-
-	/*Call Darw on objects here*/
-	tower->draw();
-
-	Renderer::GetInstance()->RenderScreen();
-}
-void DrawMenu()
-{
-	Renderer::GetInstance()->ClearRenderer();
-
-	/*Call Darw on objects here*/
-	backGroundImage->Draw();
+	menu = new Menu(SCREEN_WIDTH, SCREEN_HEIGHT);
+	play = new Play(&world,SCREEN_WIDTH, SCREEN_HEIGHT);
 	
-
-	Renderer::GetInstance()->RenderScreen();
-}
-bool UpdateMenu(SDL_Event e)
-{
-	if (e.type == SDL_MOUSEBUTTONDOWN) {
-		//If the left mouse button was pressed
-		if (e.button.button == SDL_BUTTON_LEFT) {
-			//Get the mouse offsets
-			int mouse_x = e.button.x;
-			int mouse_y = e.button.y;
-			//SDL_Log("Mouse Button 1 (left) is pressed. x = " + x );
-			/*std::cout << "Mouse Button 1 (left) is pressed. x = " << mouse_x << ", y = " << mouse_y << std::endl;
-			if (playButton.IsClicked(mouse_x, mouse_y)) {
-				gameState = PLAY;
-			}
-			else if (exitButton.IsClicked(mouse_x, mouse_y)) {
-				return true; 
-			}*/
-		}
-	}
-	return false;
-}
-void UpdateGame()
-{
-	//fixed timestep
-	while (myClock.now() > lastTickTime + TIME_PER_TICK) {
-		lastTickTime += TIME_PER_TICK;
-
-		tower->update(
-			KeyBoardInput::GetInstance()->isKeyPressed(SDLK_LEFT),
-			KeyBoardInput::GetInstance()->isKeyPressed(SDLK_RIGHT)
-			);
-	}
 }
 void Reset()
 {
@@ -196,6 +121,7 @@ void Reset()
 }
 void ClearPointers()
 {
-	delete backGroundImage;
-	delete tower;
+	delete menu;
+	delete play;
+	
 }
