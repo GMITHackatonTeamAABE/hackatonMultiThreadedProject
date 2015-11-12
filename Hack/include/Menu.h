@@ -9,7 +9,7 @@
 #include "include\GameStateController.h"
 
 
-static class Menu
+class Menu
 {
 private:
 	Button playButton;

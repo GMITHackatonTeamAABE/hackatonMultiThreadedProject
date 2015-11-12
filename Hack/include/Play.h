@@ -8,16 +8,25 @@
 #include <Box2D/Box2D.h>
 #include "include\Button.h"
 #include "include\GameStateController.h"
+#include <include/KeyBoardInput.h>
 #include <include/Tower.h>
 #include "include\Bullet.h"
+#include <chrono>
+#include "EnemyManager.h"
 
-static class Play
+class Play
 {
 private:
 	Sprite* backGroundImage;
 	Tower* tower;
 	b2World* world;
 	Bullet* bullet;
+	bool clockInit;
+
+	int mouseX, mouseY;
+	std::chrono::steady_clock myClock;
+	chrono::time_point<chrono::steady_clock> lastTickTime;
+	const chrono::milliseconds TIME_PER_TICK;
 public:
 
 	Play(b2World*,int w, int h);
@@ -29,8 +38,8 @@ public:
 	void Init();
 	
 	void Update();
-	void Draw();
+	void Draw() const;
 
-
+	void UpdateMousePos(int x, int y);
 };
 #endif

@@ -25,12 +25,16 @@ void KeyBoardInput::updateKeyboard(SDL_Event e)
 	{
 		pressedKeys.push_back(e.key.keysym.sym);
 	}
+	else if(e.type == SDL_KEYUP)
+	{
+		pressedKeys.remove(e.key.keysym.sym);
+	}
 }
 void KeyBoardInput::clearKeys()
 {
 	pressedKeys.clear();
 }
-bool KeyBoardInput::isKeyPressed(SDL_Keycode key)
+bool KeyBoardInput::isKeyPressed(SDL_Keycode key) const
 {
 	for each (SDL_Keycode pressed in pressedKeys)
 	{

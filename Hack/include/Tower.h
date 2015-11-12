@@ -10,7 +10,7 @@ public:
 	Tower(b2World &world, float posX, float posY);
 	virtual ~Tower();
 
-	virtual void update(float timestep, float targetX, float targetY);
+	virtual void update(bool angleUp, bool angleDown);
 	virtual void draw();
 	//virtual Projectile* fire();
 
@@ -21,9 +21,12 @@ protected:
 
 	b2Body* mBodyPtr;
 
-	float mAngle;
+	double mAngle;
 
 	const b2Vec2 mTURRET_OFFSET;
+	const double mMAX_ANGLE, mMIN_ANGLE;
+
+	float posX, posY;
 
 	//std::queue<Projectile> mProjectiles;
 };

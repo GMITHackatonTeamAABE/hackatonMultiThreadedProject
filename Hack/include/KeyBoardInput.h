@@ -13,7 +13,7 @@ class KeyBoardInput
 public:
 
 	void updateKeyboard(SDL_Event e);
-	bool isKeyPressed(SDL_Keycode key);
+	bool isKeyPressed(SDL_Keycode key) const;
 	void clearKeys();
 	static KeyBoardInput* GetInstance();
 	~KeyBoardInput()

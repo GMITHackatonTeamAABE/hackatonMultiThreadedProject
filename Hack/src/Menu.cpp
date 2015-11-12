@@ -5,7 +5,7 @@ Menu::Menu(int SCREEN_WIDTH, int SCREEN_HEIGHT)
 	backGroundImage = new Sprite();
 	SDL_Rect destination = { SCREEN_WIDTH / 2 ,SCREEN_HEIGHT / 2 , SCREEN_WIDTH, SCREEN_HEIGHT };
 	SDL_Rect Source = { 0, 0, 1920, 1200 };
-	backGroundImage->Init("Assets/background.png", destination, Source);
+	backGroundImage->Init("Assets/background1.png", destination, Source);
 	backGroundImage->SetOffset(SDL_Point{ SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2 });
 	destination = { SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT / 4 - 150, 400, 300 };
 	playButton.Init(destination, "Assets/PlayButton.png");
