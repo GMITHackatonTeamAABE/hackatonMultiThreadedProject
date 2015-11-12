@@ -115,6 +115,7 @@ int wmain()
 				else if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_RETURN))
 				{
 					gameState = PLAY;
+					lastTickTime = lastFrameTime = myClock.now();
 				}
 
 			}//end while wuit
@@ -137,8 +138,6 @@ void Init()
 	backGroundImage->SetOffset(SDL_Point{ SCREEN_WIDTH/2,SCREEN_HEIGHT/2});
 
 	tower = new Tower(world, 100, 100);
-
-	lastTickTime = lastFrameTime = myClock.now();
 }
 void DrawGame()
 {
@@ -185,7 +184,7 @@ void UpdateGame()
 	while (myClock.now() > lastTickTime + TIME_PER_TICK) {
 		lastTickTime += TIME_PER_TICK;
 
-		tower->update(1.0f,
+		tower->update(
 			KeyBoardInput::GetInstance()->isKeyPressed(SDLK_LEFT),
 			KeyBoardInput::GetInstance()->isKeyPressed(SDLK_RIGHT)
 			);

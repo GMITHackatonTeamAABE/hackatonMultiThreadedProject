@@ -4,7 +4,9 @@ Tower::Tower(b2World &world, float _posX, float _posY):
 	mAngle(0),
 	mTURRET_OFFSET(30, 10),
 	posX(_posX),
-	posY(_posY)
+	posY(_posY),
+	mMAX_ANGLE(20),
+	mMIN_ANGLE(-75)
 {
 	mBodySprite.Init("./assets/base.png",
 		SDL_Rect{ int(posX),int(posY),76,43 },
@@ -80,12 +82,12 @@ float toDegrees(float radians)
 //	std::cout << "Angle: " << mAngle << std::endl;
 //}
 
-void Tower::update(float timestep, bool angleUp, bool angleDown)
+void Tower::update(bool angleUp, bool angleDown)
 {
-	if(angleUp)
+	if(angleUp && mAngle > mMIN_ANGLE)
 	{
 		mAngle--;
-	} else if(angleDown)
+	} else if(angleDown && mAngle < mMAX_ANGLE)
 	{
 		mAngle++;
 	}
