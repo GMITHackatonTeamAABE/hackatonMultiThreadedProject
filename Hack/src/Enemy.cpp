@@ -56,3 +56,15 @@ void Enemy::update() {
 void Enemy::draw() {
 	m_sprite.Draw();
 }
+
+bool Enemy::checkCollisions() {
+	for (b2ContactEdge* edge = m_body->GetContactList(); edge; edge = edge->next) {
+		b2Fixture* a = edge->contact->GetFixtureA();
+		b2Fixture* b = edge->contact->GetFixtureB();
+
+		if (a->IsSensor() || b->IsSensor()) {
+			return true;
+		}
+	}
+	return false;
+}

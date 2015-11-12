@@ -45,5 +45,8 @@ void EnemyManager::RemoveEnemy(Enemy* removalEnemy) {
 void EnemyManager::Update() {
 	for each (Enemy* e in m_enemies) {
 		e->update();
+		if (e->checkCollisions()) {
+			RemoveEnemy(e);
+		}
 	}
 }
