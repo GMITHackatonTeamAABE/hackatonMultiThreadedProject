@@ -1,9 +1,13 @@
+#pragma comment(lib, "Box2D.lib")
+
 #include <SDL.h>			//SDL
 #include <SDL_ttf.h>
 #include <string>
-#include "include\Renderer.h"
-#include "include\Sprite.h"
-#include "include\KeyBoardInput.h"
+#include <Box2D/Box2D.h>
+#include <include\Renderer.h>
+#include <include\Sprite.h>
+#include <include\KeyBoardInput.h>
+#include <include/Tower.h>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1248;			//SDL
@@ -16,7 +20,9 @@ int gameState;
 
 
 Sprite* backGroundImage;
+Tower* tower;
 
+int mouseX, mouseY;
 
 
 
@@ -74,7 +80,11 @@ int wmain()
 					case SDL_QUIT:
 						quit = true;
 						break;
-
+					case SDL_MOUSEMOTION:
+						mouseX = e.motion.x;
+						mouseY = e.motion.y;
+						std::cout << "X: " << mouseX << "\tY: " << mouseY << std::endl;
+						break;
 					}
 				}
 
@@ -99,6 +109,10 @@ int wmain()
 				{
 					quit = true;
 				}
+				else if (KeyBoardInput::GetInstance()->isKeyPressed(SDLK_RETURN))
+				{
+					gameState = PLAY;
+				}
 
 			}//end while wuit
 		}//end else
@@ -110,6 +124,7 @@ int wmain()
 
 void Init()
 {
+	b2World world = b2World(b2Vec2_zero);
 
 	gameState = MENU;
 	backGroundImage = new Sprite();
@@ -117,13 +132,15 @@ void Init()
 	SDL_Rect Source = { 0, 0, 1240, 720 };
 	backGroundImage->Init("Assets/menu.png", destination, Source);
 	backGroundImage->SetOffset(SDL_Point{ SCREEN_WIDTH/2,SCREEN_HEIGHT/2});
+
+	tower = new Tower(world, 100, 100);
 }
 void DrawGame()
 {
 	Renderer::GetInstance()->ClearRenderer();
 
 	/*Call Darw on objects here*/
-
+	tower->draw();
 
 	Renderer::GetInstance()->RenderScreen();
 }
@@ -159,7 +176,7 @@ bool UpdateMenu(SDL_Event e)
 }
 void UpdateGame()
 {
-
+	tower->update(1.0f, 0, 1);
 }
 void Reset()
 {
@@ -168,4 +185,5 @@ void Reset()
 void ClearPointers()
 {
 	delete backGroundImage;
+	delete tower;
 }
