@@ -16,6 +16,7 @@
 #include "include\Bullet.h"
 #include <chrono>
 #include "EnemyManager.h"
+#include "include\floor.h"
 
 class Play
 {
@@ -24,6 +25,7 @@ private:
 	Tower* tower;
 	b2World* world;
 	Bullet* bullet;
+	Floor* floor;
 	bool clockInit;
 
 	int mouseX, mouseY;
@@ -37,6 +39,8 @@ public:
 	{
 		delete backGroundImage;
 		delete tower;
+		delete floor;
+		delete bullet;
 	}
 	void Init();
 	

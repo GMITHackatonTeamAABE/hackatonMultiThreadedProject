@@ -170,6 +170,7 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     <ClInclude Include="include\EnemyManager.h" />
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\floor.h" />
     <ClInclude Include="include\GameStateController.h" />
     <ClInclude Include="include\KeyBoardInput.h" />
     <ClInclude Include="include\Menu.h" />
@@ -183,6 +184,7 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     <ClCompile Include="src\BulletManager.cpp" />
     <ClCompile Include="src\EnemyManager.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
+    <ClCompile Include="src\floor.cpp" />
     <ClCompile Include="src\GameStateController.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>

@@ -12,7 +12,7 @@ Play::Play(b2World* w, int SCREEN_WIDTH, int SCREEN_HEIGHT) :
 	backGroundImage->SetOffset(SDL_Point{ SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2 });
 
 	tower = new Tower(*world, 1000, 200);
-
+	floor = new Floor(world, SDL_Rect{0,SCREEN_HEIGHT,SCREEN_WIDTH,10});
 	EnemyManager::GetInstance()->AddEnemy(10, 10, world);
 }
 
