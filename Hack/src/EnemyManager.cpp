@@ -1,4 +1,4 @@
-#include <EnemyManager.h>
+#include <include/EnemyManager.h>
 
 bool EnemyManager::instanceFlag = false;
 EnemyManager* EnemyManager::instance = NULL;
@@ -39,5 +39,11 @@ void EnemyManager::RemoveEnemy(Enemy* removalEnemy) {
 			m_enemies.remove(e);
 			e->~Enemy();
 		}
+	}
+}
+
+void EnemyManager::Update() {
+	for each (Enemy* e in m_enemies) {
+		e->update();
 	}
 }

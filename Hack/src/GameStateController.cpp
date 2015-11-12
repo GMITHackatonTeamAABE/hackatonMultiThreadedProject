@@ -1,13 +1,13 @@
 #include <include\GameStateController.h>
 
 bool GameStateController::instanceFlag = false;
-GameStateController* GameStateController::instance = NULL;
+GameStateController* GameStateController::instance = nullptr;
 
 GameStateController* GameStateController::GetInstance()
 {
 	if (!instanceFlag)
 	{
-		instance = new GameStateController;
+		instance = new GameStateController();
 		instanceFlag = true;
 		return instance;
 	}
@@ -18,4 +18,5 @@ GameStateController* GameStateController::GetInstance()
 }
 
 void GameStateController::SetGameState(int g) { GameState = g; }
-int GameStateController::getGameState() { return GameState; }
+int GameStateController::getGameState() const
+{ return GameState; }
