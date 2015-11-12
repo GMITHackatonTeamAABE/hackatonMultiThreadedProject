@@ -11,6 +11,7 @@
 #include "include\Menu.h"
 #include "include\Play.h"
 #include <Box2D/Box2D.h>
+#include "include\SoundManager.h"
 
 
 //Screen dimension constants
@@ -20,10 +21,12 @@ const int SCREEN_HEIGHT = 704;			//SDL
 Menu* menu;
 Play* play;
 b2World world(b2Vec2(0,9.81));
+bool quit;
 
 void Init();
 void Reset();
 void ClearPointers();
+
 
 int wmain(){
 	//The window we'll be rendering to
@@ -52,7 +55,7 @@ int wmain(){
 				return 0;
 			}
 
-			bool quit = false;
+			
 			Init();
 
 			SDL_Event e;
@@ -102,8 +105,13 @@ int wmain(){
 }
 
 void Init(){
+	quit = false;
 	menu = new Menu(SCREEN_WIDTH, SCREEN_HEIGHT);
 	play = new Play(&world,SCREEN_WIDTH, SCREEN_HEIGHT);
+	if (!SoundManager::GetInstance()->load_files())
+	{
+		printf("Sounds Did not load ");
+	}
 }
 
 void Reset(){
@@ -112,4 +120,5 @@ void Reset(){
 void ClearPointers(){
 	delete menu;
 	delete play;
+	SoundManager::GetInstance()->clean_up();
 }

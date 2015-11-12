@@ -24,6 +24,7 @@ bool Menu::Update(SDL_Event e)
 			//Get the mouse offsets
 			int mouse_x = e.button.x;
 			int mouse_y = e.button.y;
+			SoundManager::GetInstance()->play(SoundManager::SHOOT);
 			std::cout << "Mouse Button 1 (left) is pressed. x = " << mouse_x << ", y = " << mouse_y << std::endl;
 			if (playButton.IsClicked(mouse_x, mouse_y)) {
 				GameStateController::GetInstance()->SetGameState(GameStateController::PLAY);

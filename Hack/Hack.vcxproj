@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir);$(BOX2D);$(SDL)/include;$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(IncludePath)</IncludePath>
-    <LibraryPath>$(BOX2D);$(SDL)/lib/x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(BOX2D);$(SDL)/include;$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\SDL2_mixer\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOX2D);$(SDL)/lib/x86;C:\SDL2_mixer\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -94,11 +94,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDL2_mixer/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_image.lib;SDL2.lib;SDL2_mixer.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\SDL2_mixer\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(SDL)\*.dll" "$(TargetDir)" /Y /D
@@ -177,10 +178,12 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Play.h" />
     <ClInclude Include="include\Renderer.h" />
+    <ClInclude Include="include\SoundManager.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\Tower.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\SoundManager.cpp" />
     <ClCompile Include="src\EnemyManager.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\floor.cpp" />
