@@ -17,16 +17,20 @@ public:
 	virtual void projectileHit(b2Body* projectile, b2Body* other);
 
 protected:
-	Sprite mBodySprite, mTurretSprite;
+	Sprite mBodySprite, mTurretSprite, mBuildingSprite;
 
 	b2Body* mBodyPtr;
 
 	double mAngle;
 
-	const b2Vec2 mTURRET_OFFSET;
+	const b2Vec2 mTURRET_OFFSET, mBUILDING_OFFSET;
 	const double mMAX_ANGLE, mMIN_ANGLE;
 
 	float posX, posY;
+
+	b2PolygonShape mShape;
+	b2BodyDef mBodyDef;
+	b2FixtureDef mFixDef;
 
 	//std::queue<Projectile> mProjectiles;
 };

@@ -3,10 +3,11 @@
 Tower::Tower(b2World &world, float _posX, float _posY):
 	mAngle(180),
 	mTURRET_OFFSET(40, 20),
-	posX(_posX),
-	posY(_posY),
+	mBUILDING_OFFSET(-40, -222),
 	mMAX_ANGLE(270),
-	mMIN_ANGLE(150)
+	mMIN_ANGLE(150),
+	posX(_posX),
+	posY(_posY)
 {
 	mBodySprite.Init("./assets/base.png",
 		SDL_Rect{ int(posX),int(posY),76,43 },
@@ -18,13 +19,31 @@ Tower::Tower(b2World &world, float _posX, float _posY):
 		SDL_Rect{ 0,0,49,9 }
 	);
 
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_staticBody;
-	bodyDef.userData = this;
-	bodyDef.position.x = posX;
-	bodyDef.position.y = posY;
+	mBuildingSprite.Init("./assets/tower.png",
+		SDL_Rect{ int(posX+mBUILDING_OFFSET.x),int(posY+mBUILDING_OFFSET.y),284,800 },
+		SDL_Rect{ 0,0,284,800 }
+	);
 
-	mBodyPtr = world.CreateBody(&bodyDef);
+	//Box2D body creation
+	mBodyDef.type = b2_staticBody;
+	mBodyDef.userData = this;
+	mBodyDef.position.Set(posX, posY);
+
+	b2Vec2 points[4] = {
+		b2Vec2(posX + mBUILDING_OFFSET.x, posY + mBUILDING_OFFSET.y),				//TOP LEFT
+		b2Vec2(posX + mBUILDING_OFFSET.x + 284, posY + mBUILDING_OFFSET.y),			//TOP RIGHT
+		b2Vec2(posX + mBUILDING_OFFSET.x + 284, posY + mBUILDING_OFFSET.y + 800),	//BOTTOM RIGHT
+		b2Vec2(posX + mBUILDING_OFFSET.x, posY + mBUILDING_OFFSET.y + 800)			//BOTTOM LEFT
+	};
+
+	mShape.Set(points, 4);
+	
+	mFixDef.userData = this;
+	mFixDef.isSensor = false;
+	mFixDef.shape = &mShape;
+
+	mBodyPtr = world.CreateBody(&mBodyDef);
+	mBodyPtr->CreateFixture(&mFixDef);
 }
 
 Tower::~Tower()
@@ -33,6 +52,7 @@ Tower::~Tower()
 
 void Tower::draw()
 {
+	mBuildingSprite.Draw();
 	mTurretSprite.Draw();
 	mBodySprite.Draw();
 }
