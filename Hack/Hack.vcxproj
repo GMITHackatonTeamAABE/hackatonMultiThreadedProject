@@ -170,14 +170,18 @@ xcopy "$(SDL)\lib\x86\*.dll" "$(TargetDir)" /Y /D</Command>
     <ClInclude Include="include\GameStateController.h" />
     <ClInclude Include="include\KeyBoardInput.h" />
     <ClInclude Include="include\Menu.h" />
+    <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Renderer.h" />
     <ClInclude Include="include\Sprite.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Button.cpp">
+    <ClCompile Include="src\GameStateController.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\GameStateController.cpp">
+    <ClCompile Include="src\Bullet.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Hack.cpp">
