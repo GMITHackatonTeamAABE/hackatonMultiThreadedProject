@@ -18,7 +18,7 @@ Bullet::Bullet(float x, float y, b2World& world) {
 }
 
 void Bullet::Update(float dir) {
-	sprite->SetPosition(m_position.x, m_position.y);
+	sprite->SetPosition(bulletBody->GetPosition().x, bulletBody->GetPosition().y);
 	sprite->SetDestinationRect(spriteRect);
 }
 
