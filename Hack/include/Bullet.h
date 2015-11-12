@@ -24,10 +24,10 @@ private:
 	SDL_Rect spriteRect;
 public:
 	Bullet(float x, float y, b2World& World);
-	void Update(float dir); 
+	void Update(); 
 	void CreateBody();
-	//bool CheckLife();
 	void Fire(float dir);
+	void setPosition(float x, float y);
 	bool CheckCollision(SDL_Rect* rect);
 	void Draw();
 

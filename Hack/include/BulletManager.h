@@ -8,23 +8,18 @@
 class BulletManager {
 private:
 	static bool instanceFlag;
-
-	BulletManager::BulletManager() { 
-	
+	static BulletManager* instance;
+	BulletManager() { 
+		
 	}
+	std::list<Bullet*> bullets;
 public:
-	static BulletManager* BulletManager::getInstance() {
-
-	}
-	void BulletManager::Update() {
-
-	}
-	void BulletManager::add(Bullet bullet) {
-		//bullets.add(new Bullet(x,y, world));
-	}
-	BulletManager::~BulletManager() {
-		instanceFlag = false;
-	}
+	static BulletManager* getInstance();
+	void Update();
+	void Fire(float dir);
+	void add(float x, float y, b2World& world);
+	void Draw();
+	~BulletManager();
 };
 
 #endif

@@ -17,9 +17,15 @@ Bullet::Bullet(float x, float y, b2World& world) {
 	bulletBody = world.CreateBody(&bodyDef);
 }
 
-void Bullet::Update(float dir) {
+void Bullet::Update() {
 	sprite->SetPosition(bulletBody->GetPosition().x, bulletBody->GetPosition().y);
 	sprite->SetDestinationRect(spriteRect);
+
+}
+
+void Bullet::setPosition(float x, float y) {
+	m_position.x = x;
+	m_position.y = y;
 }
 
 bool Bullet::CheckCollision(SDL_Rect* rect) {
