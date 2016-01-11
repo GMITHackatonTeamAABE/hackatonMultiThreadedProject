@@ -21,12 +21,12 @@ int main(int argc, char** argv){
 
 	Game* game = new Game();
 
-	XMLDocument doc;
+	/*XMLDocument doc;
 	doc.LoadFile("Levels.xml");
 
-	const char* temp = doc.FirstChildElement("root")->FirstChildElement("level1")->FirstChildElement("player")->FirstChildElement("health")->GetText();
+	const char* temp = doc.FirstChildElement("root")->FirstChildElement("level1")->FirstChildElement("player")->FirstChildElement("health")->GetText();*/
 
-	DEBUG_MSG(temp);
+	//DEBUG_MSG(temp);
 
 	//Adjust screen positions as needed
 	DEBUG_MSG("Game Initialising");

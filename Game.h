@@ -4,6 +4,7 @@
 #include <memory>
 #include <mutex>
 #include <atomic>
+#include <chrono>
 #include <SDL.h>
 #include "Player.h"
 
@@ -29,9 +30,13 @@ private:
 	SDL_Rect m_Destination;
 	SDL_Surface* m_p_Surface;
 
-	std::unique_ptr<Player> mPlayer;
+	unique_ptr<Player> mPlayer;
 
-	std::mutex mMutex;
+	mutex mMutex;
+
+	chrono::milliseconds timePerUpdate;
+	chrono::steady_clock updateClock;
+	chrono::time_point<chrono::system_clock> timeOfLastUpdate;
 };
 #endif
 

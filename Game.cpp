@@ -17,6 +17,9 @@ bool Game::Initialize(const char* title, int xpos, int ypos, int width, int heig
 {
 	lock_guard<mutex> lock(mMutex);
 
+	timeOfLastUpdate = updateClock.now();
+	timePerUpdate = chrono::milliseconds(16);
+
 	if(SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		DEBUG_MSG("SDL Init success");
@@ -100,8 +103,11 @@ void Game::Render()
 
 void Game::Update()
 {
-	//DEBUG_MSG("Updating....");
-	mPlayer->Update();
+	if (updateClock.now() - timeOfLastUpdate >= timePerUpdate) {
+		timeOfLastUpdate = updateClock.now();
+		//DEBUG_MSG("Updating....");
+		mPlayer->Update();
+	}
 }
 
 void Game::HandleEvents()
