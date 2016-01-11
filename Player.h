@@ -1,7 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <list>
 #include "GameObject.h"
+
+typedef const unsigned char Direction;	//bitfield
 
 class Player : public GameObject
 {
@@ -13,17 +16,17 @@ public:
 	void Update() override;
 	void CleanUp() override;
 
-	enum Direction {
-		NONE,
-		NORTH,
-		SOUTH,
-		EAST,
-		WEST
-	};
+	void Sleep();
+	void Wake();
+	bool IsAwake() const;
+	atomic<bool> awake;
 
-	void Move(Direction dir);
+	const Direction UP, DOWN, LEFT, RIGHT;
+
+	void Instruct(Direction direction);
 
 private:
-	Direction mDirection;
+	list<Direction> instructions;
+	SDL_sem* semaphore;
 };
 #endif

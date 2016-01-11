@@ -89,7 +89,6 @@ void Game::LoadContent()
 
 void Game::Render()
 {
-	lock_guard<mutex> lock(mMutex);
 	SDL_RenderClear(m_p_Renderer);
 	//DEBUG_MSG("Width Source" + m_Destination.w);
 	//DEBUG_MSG("Width Destination" + m_Destination.w);
@@ -101,7 +100,6 @@ void Game::Render()
 
 void Game::Update()
 {
-	lock_guard<mutex> lock(mMutex);
 	//DEBUG_MSG("Updating....");
 	mPlayer->Update();
 }
@@ -110,7 +108,7 @@ void Game::HandleEvents()
 {
 	SDL_Event event;
 	bool assignDirection = false;
-	Player::Direction newDirection;
+	unsigned char direction = 0x00;	//bitflags
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type) {
@@ -123,52 +121,46 @@ void Game::HandleEvents()
 			case SDLK_UP:
 				//DEBUG_MSG("Up Key Pressed");
 				//SDL_SetRenderDrawColor(m_p_Renderer, 255, 0, 0, 255);
-				newDirection = Player::Direction::NORTH;
+				direction = mPlayer->UP;
 				assignDirection = true;
 				break;
 			case SDLK_DOWN:
 				//DEBUG_MSG("Down Key Pressed");
 				//SDL_SetRenderDrawColor(m_p_Renderer, 0, 255, 0, 255);
-				newDirection = Player::Direction::SOUTH;
+				direction = mPlayer->DOWN;
 				assignDirection = true;
 				break;
 			case SDLK_LEFT:
 				//DEBUG_MSG("Left Key Pressed");
 				//SDL_SetRenderDrawColor(m_p_Renderer, 0, 0, 255, 255);
-				newDirection = Player::Direction::WEST;
+				direction = mPlayer->LEFT;
 				assignDirection = true;
 				break;
 			case SDLK_RIGHT:
 				//DEBUG_MSG("Right Key Pressed");
 				//SDL_SetRenderDrawColor(m_p_Renderer, 255, 255, 255, 255);
-				newDirection = Player::Direction::EAST;
+				direction = mPlayer->RIGHT;
 				assignDirection = true;
 				break;
+			case SDLK_SPACE:
+				if (mPlayer->IsAwake()) {
+					mPlayer->Sleep();
+					SDL_SetRenderDrawColor(m_p_Renderer, 50, 50, 50, 255);
+				} else {
+					mPlayer->Wake();
+					SDL_SetRenderDrawColor(m_p_Renderer, 255, 255, 255, 255);
+				}
 			default:
 				//SDL_SetRenderDrawColor(m_p_Renderer, 0, 0, 0, 255);
 				break;
 			}
 			break;
-
-		case SDL_KEYUP:
-			switch (event.key.keysym.sym)
-			{
-			case SDLK_UP:
-			case SDLK_DOWN:
-			case SDLK_LEFT:
-			case SDLK_RIGHT:
-				newDirection = Player::Direction::NONE;
-				assignDirection = true;
-			default:
-				break;
-			}
-			break;
 		}
-	}
 
-	if (assignDirection) {
-		lock_guard<mutex> lock(mMutex);
-		mPlayer->Move(newDirection);
+		if (assignDirection) {
+			DEBUG_MSG("inst");
+			mPlayer->Instruct(direction);
+		}
 	}
 }
 

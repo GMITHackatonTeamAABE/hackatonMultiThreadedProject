@@ -1,6 +1,13 @@
 #include "Player.h"
 
-Player::Player(SDL_Texture* texture)
+Player::Player(SDL_Texture* texture) :
+instructions(),
+semaphore(SDL_CreateSemaphore(0)),
+UP(0x01),
+RIGHT(0x10),
+DOWN(0x02),
+LEFT(0x20),
+awake(true)
 {
 	DEBUG_MSG("Constructing Player");
 	mTexture = texture;
@@ -27,26 +34,36 @@ void Player::Render(SDL_Renderer* renderer)
 
 void Player::Update()
 {
-	//DEBUG_MSG("Player Updating");
-	switch (mDirection)
-	{
-	case NORTH:
-		SetY(GetY() - 0.01f);
-		break;
-	case SOUTH:
-		SetY(GetY() + 0.01f);
-		break;
-	case EAST:
-		SetX(GetX() + 0.01f);
-		break;
-	case WEST:
-		SetX(GetX() - 0.01f);
-		break;
+	if (awake) {
+		SDL_SemWait(semaphore);	//wait for semaphore to be positive
+		DEBUG_MSG("sem");
+		unsigned char direction;	//direction to travel in
+		{
+			lock_guard<mutex> lock(mMutex);	//lock (scoped) mutex for std::list manipulation
+			_ASSERT(instructions.size() > 0);	//if we're here it means the semaphore is positive, so the size of the list should also be positive
+			direction = *instructions.begin();
+			instructions.pop_front();
+		}
 
-	case NONE:
-	default:
-		break;
+		//check if we should move vertically
+		if (direction & UP) {
+			SetY(GetY() - 5.f);
+		}
+		else if (direction & DOWN) {
+			SetY(GetY() + 5.f);
+		}
+
+		//check if we should move horizontally
+		if (direction & LEFT) {
+			SetX(GetX() - 5.f);
+		}
+		else if (direction & RIGHT) {
+			SetX(GetX() + 5.f);
+		}
+
+		//printf("X: %f, Y: %f", GetX(), GetY());
 	}
+
 }
 
 void Player::CleanUp()
@@ -54,6 +71,22 @@ void Player::CleanUp()
 	DEBUG_MSG("Cleaning Up Player");
 }
 
-void Player::Move(Direction dir) {
-	mDirection = dir;
+void Player::Sleep() {
+	awake = false;
 }
+
+void Player::Wake() {
+	awake = true;
+}
+
+bool Player::IsAwake() const {
+	return awake;
+}
+
+void Player::Instruct(const unsigned char direction) {
+	lock_guard<mutex> lock(mMutex);	//lock (scoped) mutex for std::list manipulation
+	instructions.push_back(direction);
+	SDL_SemPost(semaphore);	//increment semaphore because we pushed a new direction into the instruction list
+}
+
+
