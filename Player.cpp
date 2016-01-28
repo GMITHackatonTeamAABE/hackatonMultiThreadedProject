@@ -39,7 +39,7 @@ void Player::Update()
 		DEBUG_MSG("sem");
 		unsigned char direction;	//direction to travel in
 		{
-			lock_guard<mutex> lock(mMutex);	//lock (scoped) mutex for std::list manipulation
+			//lock_guard<mutex> lock(mMutex);	//lock (scoped) mutex for std::list manipulation
 			_ASSERT(instructions.size() > 0);	//if we're here it means the semaphore is positive, so the size of the list should also be positive
 			direction = *instructions.begin();
 			instructions.pop_front();
@@ -84,7 +84,7 @@ bool Player::IsAwake() const {
 }
 
 void Player::Instruct(const unsigned char direction) {
-	lock_guard<mutex> lock(mMutex);	//lock (scoped) mutex for std::list manipulation
+	//lock_guard<mutex> lock(mMutex);	//lock (scoped) mutex for std::list manipulation
 	instructions.push_back(direction);
 	SDL_SemPost(semaphore);	//increment semaphore because we pushed a new direction into the instruction list
 }
